@@ -73,6 +73,11 @@ wiktionary_project: &wiktionary_project
     - path: projects/wmf_wiktionary.yaml
       options: *default_options
 
+internal_project: &internal_project
+  x-modules:
+    - path: projects/wmf_timeline.yaml
+      options: *default_options
+
 # The root of the spec tree. Domains tend to share specs by referencing them
 # using YAML references.
 spec_root: &spec_root
@@ -106,6 +111,8 @@ spec_root: &spec_root
 
     # special case for wikidata
     /{domain:www.wikidata.org}: *wikidata.org
+
+    /{domain:internal}: *internal_project
 
     # A robots.txt to make sure that the content isn't indexed.
     /robots.txt:

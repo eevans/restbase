@@ -1,0 +1,56 @@
+swagger: '2.0'
+info:
+  version: '1.0.0-beta'
+  title: Revision timeline
+  description: Indexing of revision IDs by time
+  termsofservice: https://github.com/wikimedia/restbase#restbase
+  contact:
+    name: Services
+    email: services@lists.wikimedia.org
+    url: https://www.mediawiki.org/wiki/Services
+  license:
+    name: Apache licence, v2
+    url: https://www.apache.org/licenses/LICENSE-2.0
+paths:
+  /{proj}:
+    post:
+      summary: Store a new timeline entry
+      produces:
+        - application/json
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: proj
+          in: path
+          type: string
+          required: true
+        - name: tid
+          in: formData
+          type: string
+          required: true
+        - name: rev
+          in: formData
+          type: integer
+          required: true
+      x-setup-handler:
+        # Set up a simple key-value bucket.
+        - init:
+            method: 'put'
+            uri: /{domain}/sys/key_value/timeline
+            body:
+              valueType: 'int'
+
+      x-request-handler:
+        - store_and_return:
+            request:
+              method: put
+              uri: /{domain}/sys/key_value/timeline/{request.params.proj}/{request.body.tid}
+              body: '{{ request.body.rev }}'
+            return_if:
+              status: 201
+            return:
+              status: 200
+              headers:
+                content-type: '{{store_and_return.headers.content-type}}'
+                etag: '{{store_and_return.headers.etag}}'
+              body: '{{store_and_return.body}}'
