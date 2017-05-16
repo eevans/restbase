@@ -856,7 +856,7 @@ module.exports = (options) => {
                 uri: `/{domain}/sys/${options.bucket_type}/parsoid.html`,
                 body: {
                     revisionRetentionPolicy: {
-                        type: 'latest',
+                        type: 'latest_hash',
                         count: 1,
                         grace_ttl: 86400
                     },
@@ -874,7 +874,7 @@ module.exports = (options) => {
                 uri: `/{domain}/sys/${options.bucket_type}/parsoid.data-parsoid`,
                 body: {
                     revisionRetentionPolicy: {
-                        type: 'latest',
+                        type: 'latest_hash',
                         count: 1,
                         grace_ttl: 86400
                     },
@@ -886,7 +886,7 @@ module.exports = (options) => {
                 uri: `/{domain}/sys/${options.bucket_type}/parsoid.section.offsets`,
                 body: {
                     revisionRetentionPolicy: {
-                        type: 'latest',
+                        type: 'latest_hash',
                         count: 1,
                         grace_ttl: 86400
                     },
