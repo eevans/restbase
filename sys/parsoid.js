@@ -861,7 +861,7 @@ module.exports = (options) => {
                         grace_ttl: 86400
                     },
                     valueType: 'blob',
-                    version: 1
+                    version: 2
                 }
             },
             {
@@ -879,7 +879,7 @@ module.exports = (options) => {
                         grace_ttl: 86400
                     },
                     valueType: 'json',
-                    version: 1
+                    version: 2
                 }
             },
             {
@@ -891,7 +891,7 @@ module.exports = (options) => {
                         grace_ttl: 86400
                     },
                     valueType: 'json',
-                    version: 1
+                    version: 2
                 }
             },
             {
